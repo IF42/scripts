@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Built by MSYS2 project) (preloaded format=pdfcsplain 2024.11.11)  11 NOV 2024 13:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Built by MSYS2 project) (preloaded format=pdfcsplain 2024.11.11)  11 NOV 2024 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
  encTeX v. Jun. 2004, reencoding enabled
-**src/programming_language_theory.tex
-(./src/programming_language_theory.tex The format: csplain <Mar. 2022>.
+**src/main.tex
+(./src/main.tex The format: csplain <Mar. 2022>.
 The cs-fonts are preloaded and A4 size implicitly defined.
 The utf8->iso8859-2 re-encoding of Czech+Slovak alphabet activated by encTeX
 (c:/Users/petrh/texmf/tex/plane/tmac/tmac.tex
-This is OPmac (Olsak's Plain macros), version <Apr. 2020>
+This is OPmac (Olsak's Plain macros), version <Jul. 2015>
 \tmpnum=\count28
 \tmpdim=\dimen16
 \iindent=\dimen17
@@ -57,14 +57,16 @@ The \^, \`, \', \v, \" and \r expands to characters by ISO-8859-2.
 \pgwidth=\dimen29
 \pgheight=\dimen30
 \shiftoffset=\dimen31
-)
-(c:/Users/petrh/texmf/tex/plane/tmac/cz_hyp.tex) (./src/title.tex [1{c:/msys64/
-mingw64/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-l.7 OPmac WARNING: \maketoc -- data unavailable, TeX me again.
-\openout0 = `programming_language_theory.ref'.
 
+(pdf/main.ref)
+\openout0 = `main.ref'.
+
+) (c:/Users/petrh/texmf/tex/plane/tmac/cz_hyp.tex)
+(./src/title.tex [1{c:/msys64/mingw64/var/lib/texmf/fonts/map/pdftex/updmap/pdf
+tex.map}]
+l.7 OPmac WARNING: \maketoc -- data unavailable, TeX me again.
 [2]) )<c:/msys64/mingw64/share/texmf-dist/fonts/type1/public/cs/csbx12.pfb>
-Output written on pdf//programming_language_theory.pdf (2 pages, 7159 bytes).
+Output written on pdf/main.pdf (2 pages, 5213 bytes).
 PDF statistics:
  15 PDF objects out of 1000 (max. 8388607)
  9 compressed objects within 1 object stream

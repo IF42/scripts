@@ -1,0 +1,13 @@
+
+\section {Architektura compilátoru}
+Moderní kompilátory jsou navrženy tak, aby byly flexibilní a modulární. Tato flexibilita umožňuje kompilátoru efektivně zpracovávat různé programovací jazyky (na vstupu) a generovat kód pro různé platformy (na výstupu). Klíčem k této modularitě je standardizovaná intermediate representation (IR), kterou využívá střední část architektury kompilátoru - tzv. middle-end. 
+
+Kompilátor se nejčastěji skládá ze tří základních logických částí:
+\begin{itemize}
+    \item \textbf{Front-End} - Zpracovává vstupní programový kód.
+    \item \textbf{Middle-End} - mechanismy, které převádí abstraktní syntaktický strom na mezikód IR, případně provádějí některé platformě nezávislé optimalizace. Dále se provádí alokace paměti a registrů a jiných zdrojů procesoru. 
+    \item \textbf{Back-End} - definice cílové platformy. Na této úrovni se provádějí platformně závislé optimalizce a převádí se IR na instrukce procesoru
+\end{itemize}
+
+
+Výhodou tohoto členění architektury komilátoru je, že v případě, že je standardizovaný formát IR na vrstvě \textbf{Middle-End} je možné dynamicky měnit části \textbf{Front-End} pro zpracovávání zcela jiného programovacího jazyka a nebo \textbf{Back-End} pro generování strojových instrukcí pro zcela jinou platformu se zachování stejné gramatiky programovacího jazyka

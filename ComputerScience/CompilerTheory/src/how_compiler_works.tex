@@ -1,0 +1,29 @@
+\chap {Proces kompilace}
+\secc{Jak funguje kompilátor}
+Kompilátor je jednou z komponent nástrojové sady {\bf (toolchain)} použivané pro vytvření spustitelného souboru z programu ve formě textu ve zdrojovém jazyce. Typicky při spuštění jediného příkazu k překladu je vyvolána celá sekvence prorgamů na pozadí. 
+
+\vskip 5mm 
+\hbox to \hsize{\hfil\pdfrefximage\compilerprocessoverview\hfil}
+\nobreak\medskip
+\caption/f Proces překladu zdrojových kódů
+
+\secc Preprocesing
+Preprocesor je nástroj v procesu překladu zdrojového kódu, jehož účelem je provést úpravy kódu před samotnou kompilací. Preprocesor zpracovává specifické příkazy nebo direktivy, které mohou zahrnovat vkládání externích souborů, definici konstant a maker, podmíněné sestavení kódu nebo jeho úpravy ještě před analýzou syntaxe. Tímto způsobem může vývojář upravovat kód dynamicky podle prostředí, zvyšovat přehlednost pomocí symbolických konstant, či minimalizovat opakování kódu s použitím maker. Výstupem preprocesingu je čistý kód, připravený pro kompilaci, který splňuje požadavky a strukturu definovanou direktivami preprocesoru. Preprocesor samotný ale není nezbytnou součástí kompilátorů, proto nemusí být ve všech případe v kompilátorech přítomné.
+
+\secc{Kompilace}
+Fáze kompilace je klíčovým krokem v procesu překladu zdrojového kódu na spustitelný kód. Během této fáze kompilátor analyzuje syntaxi a sémantiku kódu, převádí ho z původního programovacího jazyka do střední reprezentace (IR) a následně aplikuje optimalizace, které zlepší efektivitu výsledného programu. Poté kompilátor IR transformuje na instrukce konkrétní strojové architektury nebo na assemblerový kód, který je blízký instrukční sadě procesoru. Účelem fáze kompilace je tedy vytvořit nízkoúrovňový kód, který je přesně přizpůsoben cílové platformě, přičemž zachovává logiku a funkčnost původního zdrojového kódu.
+
+\secc{Assembler}
+Fáze překladu assemblerového kódu do objektového kódu slouží k převodu nízkoúrovňových instrukcí, napsaných v assembleru, na strojový kód, který může být přímo interpretován procesorem. V této fázi assembler převádí každou instrukci na konkrétní binární reprezentaci odpovídající instrukční sadě cílového procesoru. Kromě toho vytváří tabulky symbolů a další metadata, která pomáhají při pozdějším sestavení (linkování). Výstupem této fáze je objektový kód, který není zatím kompletním spustitelným programem, ale obsahuje všechny základní instrukce a data, které budou spojeny a finalizovány ve fázi linkování.
+
+\secc {Linkování}
+Fáze linkování je posledním krokem v překladu programu, jehož účelem je spojit jednotlivé objektové soubory a knihovny do jednoho kompletního spustitelného souboru. Linker v této fázi vyhledá a propojí všechny odkazy na symboly (například funkce a globální proměnné) mezi různými částmi programu a knihovnami. Rovněž přiřadí výsledné adresy paměti pro tyto symboly, čímž zajistí, že programové instrukce a data jsou správně propojené a připravené k běhu. Výsledkem je hotový, spustitelný program, který může operační systém načíst a provést.
+
+\secc {Kompilace} 
+Fáze kompilace je klíčovou součástí procesu překladu, ve kterém je zdrojový kód napsaný v programovacím jazyce převáděn do podoby, kterou lze efektivně provést na cílové platformě. Tato fáze zahrnuje několik kroků, které postupně transformují zdrojový kód do podoby, která je blízká strojovému kódu, a přitom optimalizuje výkon výsledného programu. Funkce fáze kompilace se zaměřuje na analýzu, optimalizaci a převod kódu a je zásadní pro vytvoření efektivního a správného výsledného binárního souboru. V procesu kompilace lze rozlišit několik základních kroků, které dohromady přispívají k efektivnímu překladu.
+
+\secc {Lexikální analýza}
+Lexikální analýza je prvním krokem ve fázi kompilace, kde kompilátor rozkládá zdrojový kód na základní jednotky zvané tokeny. Tokeny jsou sekvence znaků, které tvoří logické stavební bloky kódu, jako jsou klíčová slova, identifikátory, operátory a literály. Lexikální analyzátor prochází zdrojový kód, identifikuje tyto tokeny a zpracovává je tak, aby byly připraveny pro další fázi. Pokud zjistí chyby, například neznámé znaky, kompilace je přerušena a uživatel je informován.
+
+\hfil\pdfrefximage\compilesteps\hfil
+
