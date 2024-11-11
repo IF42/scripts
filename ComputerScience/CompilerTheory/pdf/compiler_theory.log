@@ -1,0 +1,471 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Built by MSYS2 project) (preloaded format=pdfcsplain 2024.11.11)  11 NOV 2024 13:51
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+ encTeX v. Jun. 2004, reencoding enabled
+**src/compiler_theory.tex
+(./src/compiler_theory.tex The format: csplain <Mar. 2022>.
+The cs-fonts are preloaded and A4 size implicitly defined.
+The utf8->iso8859-2 re-encoding of Czech+Slovak alphabet activated by encTeX
+(c:/Users/petrh/texmf/tex/plane/tmac/tmac.tex
+This is OPmac (Olsak's Plain macros), version <Apr. 2020>
+\tmpnum=\count28
+\tmpdim=\dimen16
+\iindent=\dimen17
+\ttindent=\dimen18
+\colsep=\dimen19
+\mnoteindent=\dimen20
+\mnotesize=\dimen21
+\titskip=\skip18
+\ptunit=\dimen22
+\fontdim=\dimen23
+(c:/msys64/mingw64/share/texmf-dist/tex/csplain/fonts/ams-math.tex
+FONT: AMS math fonts - \mathchardef's prepared, 12 math families preloaded.
+\ptmunit=\dimen24
+)
+The \^, \`, \', \v, \" and \r expands to characters by ISO-8859-2.
+\reffile=\write0
+\testin=\read0
+\chapnum=\count29
+\secnum=\count30
+\seccnum=\count31
+\nonumnum=\count32
+\remskipamount=\skip19
+\tnum=\count33
+\fnum=\count34
+\dnum=\count35
+\itemnum=\count36
+\mullines=\count37
+\oulnum=\count38
+\ttline=\count39
+\viline=\count40
+\vifile=\read1
+\tabdata=\toks12
+\colnum=\count41
+\drulewidth=\dimen25
+\picwidth=\dimen26
+\picheight=\dimen27
+\fnotenum=\count42
+\fnotenumlocal=\count43
+\mnotenum=\count44
+\mnoteskip=\dimen28
+\auxfile=\write1
+\bibnum=\count45
+\bibmark=\toks13
+\lastcitenum=\count46
+\lastpage=\count47
+\pgwidth=\dimen29
+\pgheight=\dimen30
+\shiftoffset=\dimen31
+
+(pdf//compiler_theory.ref)
+\openout0 = `compiler_theory.ref'.
+
+) (c:/Users/petrh/texmf/tex/plane/tmac/cz_hyp.tex)
+\compilerprocessoverview=\count48
+\compilesteps=\count49
+
+(./src/title.tex [1{c:/msys64/mingw64/var/lib/texmf/fonts/map/pdftex/updmap/pdf
+tex.map}] [2]) (./src/introduction.tex
+Overfull \hbox (4.12415pt too wide) in paragraph at lines 2--3
+\tenrm syn-tak-tické a sé-mantické chyby), ale zároveň umožňují op-ti-m
+al-i-zo-vat výsledný|
+
+\hbox(10.5+3.5)x452.96786, glue set - 1.0
+.\tenrm s
+.\tenrm y
+.\discretionary replacing 2
+..\tenrm n
+..\tenrm -
+.\tenrm n
+.\kern-0.38078
+.\tenrm t
+.\tenrm a
+.\tenrm k
+.\discretionary
+..\tenrm -
+.\tenrm t
+.\tenrm i
+.\tenrm c
+.\kern-0.38078
+.\tenrm k
+.\kern-0.38078
+.\tenrm é
+.\glue 4.5694 plus 2.2847 minus 1.52313
+.\tenrm a
+.\glue 4.5694 plus 2.2847 minus 1.52313
+.\tenrm s
+.\tenrm é
+.\discretionary
+..\tenrm -
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.\kern-0.38078
+.\tenrm t
+.\tenrm i
+.\tenrm c
+.\kern-0.38078
+.etc.
+
+) [1] (./src/how_compiler_works.tex [2 <./img/compiler_process_overview.png>]
+Underfull \vbox (badness 1297) has occurred while \output is active
+\vbox(680.5899+2.7222)x452.96786, glue set 2.35025
+.\glue(\topskip) 0.0
+.\hbox(11.66736+3.26685)x452.96786, glue set 308.0007fil
+..\write0<3>{\string \Xtoc {2}{\noexpand \rm }{1.0.3}{Kompilace}{\the \pageno }
+}
+..\tenbf 1
+..\tenbf .
+..\tenbf 0
+..\tenbf .
+..\tenbf 3
+..\glue 18.90115
+..\tenbf K
+..\tenbf o
+..\tenbf m
+..\tenbf p
+..\tenbf i
+..\tenbf l
+..\tenbf a
+..\tenbf c
+..\tenbf e
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 10.0 plus 3.33313 minus 3.33313
+.\penalty 11333
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\baselineskip) 7.08871
+.\hbox(9.64444+2.7222)x452.96786, glue set 0.01459
+..\tenrm F
+..\kern-1.14235
+..\tenrm á
+..\tenrm z
+..\tenrm e
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm k
+..\kern-0.38078
+..\tenrm o
+..\tenrm m
+..\discretionary
+...\tenrm -
+..\tenrm p
+..\tenrm i
+..\discretionary
+...\tenrm -
+..\tenrm l
+..\tenrm a
+..\tenrm c
+..\tenrm e
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm j
+..\tenrm e
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm k
+..\tenrm l
+..\tenrm í
+..\tenrm č
+..\tenrm o
+..\kern-0.38078
+..\tenrm v
+..\tenrm ý
+..etc.
+.\penalty 10000
+.\glue(\baselineskip) 7.63336
+.\hbox(9.64444+2.7222)x452.96786, glue set 0.00418
+..\tenrm s
+..\tenrm p
+..\tenrm u
+..\tenrm s
+..\tenrm t
+..\tenrm i
+..\tenrm t
+..\tenrm e
+..\tenrm l
+..\tenrm n
+..\kern-0.38078
+..\tenrm ý
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm k
+..\kern-0.38078
+..\tenrm ó
+..\kern0.38078
+..\tenrm d
+..\tenrm .
+..\glue 6.09253 plus 6.8541 minus 0.5077
+..\tenrm B
+..\tenrm ě
+..\tenrm h
+..\tenrm e
+..\tenrm m
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm t
+..\tenrm é
+..\tenrm t
+..\tenrm o
+..etc.
+.\glue(\baselineskip) 7.63336
+.\hbox(9.64444+2.7222)x452.96786, glue set 0.349
+..\tenrm k
+..\kern-0.38078
+..\tenrm ó
+..\kern0.38078
+..\tenrm d
+..\tenrm u
+..\tenrm ,
+..\glue 4.5694 plus 2.85587 minus 1.2185
+..\tenrm p
+..\tenrm ř
+..\tenrm e
+..\tenrm v
+..\kern-0.38078
+..\tenrm á
+..\tenrm d
+..\tenrm í
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm h
+..\tenrm o
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm z
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm p
+..\kern0.38078
+..\tenrm ů
+..\tenrm v
+..\kern-0.38078
+..\tenrm o
+..\kern0.38078
+..\tenrm d
+..etc.
+.\penalty 100
+.\glue(\baselineskip) 6.7778
+.\hbox(10.5+3.5)x452.96786, glue set - 0.52583
+..\tenrm t
+..\tenrm a
+..\tenrm c
+..\tenrm e
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm (
+..\tenrm I
+..\tenrm R
+..\tenrm )
+..\glue 4.5694 plus 2.28241 minus 1.52464
+..\tenrm a
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm n
+..\tenrm á
+..\tenrm s
+..\tenrm l
+..\tenrm e
+..\tenrm d
+..\tenrm n
+..\tenrm ě
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm a
+..\tenrm p
+..\discretionary
+...\tenrm -
+..\tenrm l
+..\tenrm i
+..\tenrm k
+..\tenrm u
+..\tenrm j
+..\tenrm e
+..etc.
+.\glue(\baselineskip) 6.85556
+.\hbox(9.64444+2.7222)x452.96786, glue set - 0.17061
+..\tenrm p
+..\tenrm r
+..\tenrm o
+..\discretionary
+...\tenrm -
+..\tenrm g
+..\tenrm r
+..\tenrm a
+..\tenrm m
+..\kern-0.38078
+..\tenrm u
+..\tenrm .
+..\glue 6.09253 plus 6.8541 minus 0.5077
+..\tenrm P
+..\kern-0.38078
+..\tenrm o
+..\tenrm t
+..\tenrm é
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm k
+..\kern-0.38078
+..\tenrm o
+..\tenrm m
+..\discretionary
+...\tenrm -
+..\tenrm p
+..\tenrm i
+..\tenrm l
+..\tenrm á
+..\discretionary
+...\tenrm -
+..\tenrm t
+..\tenrm o
+..etc.
+.\glue(\baselineskip) 7.63336
+.\hbox(9.64444+2.7222)x452.96786, glue set - 0.0314
+..\tenrm a
+..\tenrm r
+..\discretionary
+...\tenrm -
+..\tenrm c
+..\kern-0.38078
+..\tenrm h
+..\tenrm i
+..\tenrm t
+..\tenrm e
+..\tenrm k
+..\discretionary
+...\tenrm -
+..\tenrm t
+..\tenrm u
+..\tenrm r
+..\tenrm y
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm n
+..\tenrm e
+..\tenrm b
+..\kern0.38078
+..\tenrm o
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm n
+..\tenrm a
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm a
+..\tenrm s
+..\discretionary
+...\tenrm -
+..\tenrm s
+..\tenrm e
+..etc.
+.\penalty 100
+.\glue(\baselineskip) 5.60138
+.\hbox(11.67642+2.7222)x452.96786, glue set 0.0052
+..\tenrm c
+..\tenrm e
+..\discretionary
+...\tenrm -
+..\tenrm s
+..\tenrm o
+..\tenrm r
+..\tenrm u
+..\tenrm .
+..\glue 6.09253 plus 6.8541 minus 0.5077
+..\tenrm Ú
+..\tenrm č
+..\tenrm e
+..\tenrm l
+..\tenrm e
+..\tenrm m
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm f
+..\tenrm á
+..\tenrm z
+..\tenrm e
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm k
+..\kern-0.38078
+..\tenrm o
+..\tenrm m
+..\discretionary
+...\tenrm -
+..\tenrm p
+..\tenrm i
+..\discretionary
+...\tenrm -
+..\tenrm l
+..etc.
+.\glue(\baselineskip) 7.63336
+.\hbox(9.64444+2.7222)x452.96786, glue set 0.2418
+..\tenrm p
+..\tenrm ř
+..\tenrm e
+..\tenrm s
+..\tenrm n
+..\tenrm ě
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm p
+..\tenrm ř
+..\tenrm i
+..\tenrm z
+..\tenrm p
+..\kern0.38078
+..\tenrm ů
+..\discretionary
+...\tenrm -
+..\tenrm s
+..\tenrm o
+..\tenrm b
+..\kern0.38078
+..\tenrm e
+..\tenrm n
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm c
+..\tenrm í
+..\tenrm l
+..\tenrm o
+..\kern-0.38078
+..\tenrm v
+..\kern-0.38078
+..\tenrm é
+..etc.
+.\penalty 10000
+.\glue(\baselineskip) 7.63336
+.\hbox(9.64444+2.7222)x452.96786, glue set 282.75783fil
+..\tenrm p
+..\kern0.38078
+..\tenrm ů
+..\tenrm v
+..\kern-0.38078
+..\tenrm o
+..\kern0.38078
+..\tenrm d
+..\discretionary
+...\tenrm -
+..\tenrm n
+..\tenrm í
+..\tenrm h
+..\tenrm o
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm z
+..\tenrm d
+..\tenrm r
+..\discretionary replacing 2
+...\tenrm o
+...\tenrm -
+..\tenrm o
+..\kern0.76157
+..\tenrm j
+..\tenrm o
+..\kern-0.38078
+..\tenrm v
+..\kern-0.38078
+..\tenrm é
+..\tenrm h
+..\tenrm o
+..\glue 4.5694 plus 2.2847 minus 1.52313
+..\tenrm k
+..etc.
+.\penalty -200
+.\glue 10.0 plus 3.33313 minus 3.33313
+.etc.
+
+ [3])
+[4 <./img/compile_steps.png>] )<c:/msys64/mingw64/share/texmf-dist/fonts/type1/
+public/cs/csbx12.pfb><c:/msys64/mingw64/share/texmf-dist/fonts/type1/public/cs/
+csr10.pfb><c:/msys64/mingw64/share/texmf-dist/fonts/type1/public/cs/csr12.pfb>
+Output written on pdf//compiler_theory.pdf (6 pages, 49306 bytes).
+PDF statistics:
+ 37 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+
