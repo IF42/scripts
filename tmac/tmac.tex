@@ -1,12 +1,3 @@
-% OPmac
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Petr Olsak, 2012 -- 2015
-
-%% The history of versions is at the end of this file, after \endpinput
-
-\ifx\OPmacversion\undefined \else \endinput \fi
-\def\OPmacversion{Jul. 2015}  
-\immediate\write16{This is OPmac (Olsak's Plain macros), version <\OPmacversion>}
 
 %%%%%%%%%%%%%% Basic macros, sec. 3.1 in opmac-d.pdf
 
@@ -255,7 +246,6 @@
 
 \def\mtext#1{\csname mt:#1:\csname lan:\the\language\endcsname\endcsname}
 
-\sdef{mt:chap:en}{Chapter}  \sdef{mt:chap:cs}{}  \sdef{mt:chap:sk}{Kapitola}
 \sdef{mt:t:en}{Table}       \sdef{mt:t:cs}{Tabulka}      \sdef{mt:t:sk}{Tabu\v lka}
 \sdef{mt:f:en}{Figure}      \sdef{mt:f:cs}{Obr\'azek}    \sdef{mt:f:sk}{Obr\'azok}
 \sdef{mt:subj:en}{Subject}  \sdef{mt:subj:cs}{V\v{e}c}   \sdef{mt:subj:sk}{Vec}
@@ -332,10 +322,11 @@
 %%%%%%%%%%%%%% Chapters, sections, subsections -- sec. 3.8 in opmac-d.pdf
 
 \def\printchap#1{\vfill\supereject
-  {\chapfont \noindent \mtext{chap} \dotocnum{\thetocnum}\par
-   \nobreak\smallskip\noindent #1\nbpar}\mark{}%
+  {\chapfont \noindent \dotocnum{\thetocnum}
+   \nobreak\noindent #1\nbpar}\mark{}%
   \nobreak \remskip\bigskipamount \firstnoindent
 }
+
 \def\printsec#1{\par \norempenalty-400 \bigskip
   {\secfont \noindent \dotocnum{\thetocnum\quad}#1\nbpar}\insertmark{#1}%
   \nobreak \remskip\medskipamount \firstnoindent
