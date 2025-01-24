@@ -1,6 +1,6 @@
 TEX=pdfcsplain
 SRC=src
-TARGET=main
+TARGET=game_dev
 OUTPUT=pdf
 
 

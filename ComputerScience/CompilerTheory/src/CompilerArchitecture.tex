@@ -1,0 +1,53 @@
+\chap {Architektura kompilátoru}
+
+Architektura kompilátoru je klíčovým prvkem při navrhování a implementaci procesů, které přeměňují zdrojový kód napsaný v programovacím jazyce na spustitelný binární kód. Jedním z důležitých aspektů této architektury je počet průchodů, které kompilátor vykonává nad zdrojovým kódem. V této kapitole popíšeme různé typy průchodů kompilátoru, jejich výhody a nevýhody, a jak ovlivňují celkový výkon a flexibilitu.
+
+\sec{Průchody v kompilátoru}
+Průchod kompilátoru označuje proces, při kterém kompilátor načítá zdrojový kód (nebo jeho mezireprezentaci) a provádí nad ním konkrétní operace, jako je analýza, optimalizace nebo generování kódu.
+Na základě počtu průchodů lze kompilátory rozdělit do několika kategorií.
+
+\secc{Jednoprůchodový kompilátor}
+Jednoprůchodový kompilátor zpracovává zdrojový kód v jednom průchodu, tedy postupně od začátku do konce, a zároveň provádí všechny nezbytné operace (lexikální analýzu, syntaktickou analýzu, sémantickou analýzu a generování kódu) v reálném čase.
+
+To znamená, že každý prvek zdrojového kódu je analyzován pouze jednou, symbolická tabulka je průběžně aktualizována během kompilace a jsou zde omezené možnosti zpětného odkazování, což znamená, že deklarace musí předcházet jejich použití (např. funkce musí být deklarovány před jejich voláním).
+
+Výhodou je rychlý proces kompilace a nízké paměťové nároky, protože není potřeba ukládat celý AST nebo mezireprezentaci. Nevýhodou na druhou stranu je omezená schopnost optimalizace a není vhodný pro složitější programovací jazyky s podporou pokročilých funkcí, jako jsou dopředné deklarace nebo globální analýzy.
+
+Jednoprůchodové kompilátory se často používají pro jednoduché jazyky, jako byl původní Pascal nebo některé doménově specifické (DSL) a skriptovací jazyky.
+
+\secc {Víceprůchodový kompilátor}
+Víceprůchodový kompilátor zpracovává zdrojový kód nebo mezireprezentaci v několika samostatných průchodech. Každý průchod se zaměřuje na konkrétní úkol, například:
+
+\begitems
+* První průchod: Lexikální a syntaktická analýza.
+* Druhý průchod: Sémantická analýza a kontrola typů.
+* Třetí průchod: Optimalizace kódu.
+* Čtvrtý průchod: Generování strojového kódu.
+\enditems
+
+Zdrojový kód je analyzován a transformován postupně, s důrazem na modularitu. Mezi jednotlivými průchody je obvykle používána mezireprezentace (IR), která překládaný program abstrahuje od syntaxe a usnadňuje optimalizace a generování kódu. 
+
+Výhodou je flexibilita při implementaci a ladění, snadná podpora složitějších jazyků s pokročilými rysy, jako jsou zpětné odkazy, generika nebo dědičnost a lepší možnosti optimalizace, protože kompilátor má přehled o celém kódu. Nevýhodou jsou vyšší paměťové nároky (ukládání AST nebo IR) a delší doba kompilace ve srovnání s jednoprůchodovými kompilátory.
+
+Moderní kompilátory, jako jsou GCC nebo Clang, využívají víceprůchodovou architekturu primárně kvůli pokročilejší možnosti optimalizace výsledného kódu.
+
+\secc {Smíšený přístup}
+Některé kompilátory kombinují výhody obou přístupů. Například lexikální a syntaktická analýza probíhá v jednom průchodu, zatímco další fáze, jako optimalizace a generování kódu, mohou vyžadovat další průchody nad mezireprezentací.
+
+Výhodou je rovnováha mezi rychlostí a flexibilitou a zároveň možnost provádět složitější analýzu a optimalizace bez výrazného zvyšování náročnosti.
+
+\sec {Role mezireprezentace (IR)}
+Mezireprezentace (IR) hraje klíčovou roli ve víceprůchodových kompilátorech. Je to formát, který slouží jako most mezi frontendem (parsování zdrojového kódu) a backendem (generování strojového kódu) a zajišťuje konzistentní způsob práce s kódem bez ohledu na vstupní jazyk a cílovou platformu. 
+
+\secc{Co je mezireprezentace (IR)}
+IR je abstraktní reprezentace zdrojového kódu, která je nezávislá na syntaxe vstupního jazyka a architektuře cílové platformy. IR umožňuje oddělit fáze kompilace a díky tomu umožňuje nezávislý vývoj a ladění jednotlivých částí kompilátoru. Slouží také jako platforma pro provádění analýz a optimalizací kódu (např. odstranění mrtvého kódu, slučování proměnných). IR abstrahuje od konkrétní syntaxe jazyka a strojových instrukcí, což umožňuje vytvářet univerzální kompilátory.
+
+\secc{Typy mezireprezentace}
+IR může mít různé formy podle úrovně abstrakce:
+
+\begitems
+* {\bf Vysoko-úrovňová IR} - Blíže k původnímu zdrojovému kódu a udržuje větší množství sémantických informací, jako jsou typy, jména proměnných nebo struktury dat. Používá se hlavně ve frontendové části kompilátoru. Výhodou je snadná analýza a interpretace, ale je nevhodné pro nízkoúrovňové optimalizace nebo generování kódu.
+* {\bf Středně-úrovňová IR} - Vyvažuje mezi abstrakcí a detaily implementace a zachovává kontrolní a datové toky kódu, ale zjednodušuje některé jazykové konstrukce. Používá se pro většinu optimalizací v middle-endu. Výhodou je podpora pokročilých optimalizací, ale obsahuje méně sémantických informací oproti vysoko-úrovňové IR.
+* {\bf Nízko-úrovňová IR} - Blíže k cílové architektuře (např. instrukční sadě procesoru) a obsahuje detaily o alokaci registrů, instrukcích a dalších hardwarových prvcích. Používá se v backendu kompilátoru. Výhodou je přímá vazba na cílovou platformu. Vhodná pro finální optimalizace. Není ale vhodná pro analýzu a optimalizaci vyšších úrovní.
+\enditems
+

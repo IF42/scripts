@@ -1,6 +1,6 @@
 TEX=pdfcsplain
 SRC=src
-TARGET=main
+TARGET=GameTheory
 OUTPUT=pdf
 
 
