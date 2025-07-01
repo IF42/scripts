@@ -1,0 +1,38 @@
+\chap Grafické API
+
+{\bf API} - Aplication Programming Interface je obecně sada postupů, které přesně popisují přístup a ovládání určité softwarové komponenty. {\bf Grafické API} je programové rozhraní mezi programovým kódem a konkrétní grafickou kartou v počítači, které popisuje jak obecně pracovat s grafickými kartami. 
+
+Na trhu existuje velké množství grafických karet různých výrobců a každá grafická karta má určitý způsob ovládání. To znamená, že pro použití dané grafické karty je třeba vytvořit specifický postup řízení v programu, který s touto kartou pracuje. Jakmile by se ale daný program použil na počítači s jinou grafickou kartou, došlo by tomu, že by program nefungoval správně, protože jiná karta vyžaduje jiný specifický způsob ovládání. Daný program tak není přenositelný na jiný stém a vyžaduje speciální hardwarovou konfiguraci. Aby grafické programy byly přenositelné mezi systémy s různými grafickými kartami vzniklo tzv. grafické API, které přesně popisuje jednotný způsob ovládání grafických karet. 
+
+Grafické API vytváří neviditelnou mezi-vrstvu mezi grafickou kartou a programem, který s grafickou kartou potřebuje pracovat. V této neviditelné mezi-vrstvě se pak skryje způsob jak se s konkrétní grafickou kartou pracuje a vytvoří se přesně pojmenované příkazy, které mají za úkol provést přesně danou činnost. To ve výsledku znamená, že pokud grafické API zpřístupní seznam operací které budou fungovat na libovolné grafické kartě, je možné z nich sestavit komplexní grafický program a není třeba se starat o to jakým způsobem to grafické API dělá.
+
+\sec Úkoly grafického API
+\begitems
+* {\bf Správa stavu} - nastavení a míchání barev
+* {\bf Správa paměti GPU} - Nahrávání vertex dat, textur, shaderů do paměti grafické karty
+* {\bf Vykreslování geometrie}
+* {\bf Programování shaderů} 
+* {\bf Správu textur}
+* {\bf Nastavení viewporu a projekce} - Definování, jak se 3D scéna mapuje na 2D okno
+* {\bf Synchronizaci} - Zajištění správného pořadí operací mezi CPU a GPU
+\enditems
+
+
+\sec Příklady grafických API
+Existuje více v součané době používaných grafických API. Je to důsledek historického vývoje jak grafického hardwaru tak požadavků uživatelů a konkurence softwarových společností jako je Apple a Microsoft a open source komunity. Každé z těchto grafických API má své pro i proti a jsou optimální pro určité případy použití. Mezi nejčastější grafická API patří:
+\begitems
+* {\bf OpenGL - Open Graphics Library} - Starší, ale stále široce používané API od Khronos Group. Je možné jej používat na všech současných platformách - Ms Windows, Apple a GNU Linux. 
+* {\bf Direct3D} - Grafické API od Microsoftu, exkluzivní pro Windows a Xbox. Je součástí DirectX.
+* {\bf Vulkan} - Moderní, nízkoúrovňové, explicitní API od Khronos Group. Dává programátorovi mnohem větší kontrolu nad hardwarem a je navrženo pro moderní vícevláknové procesory a více GPU. Je multiplatformní (Windows, Linux, Android, částečně macOS přes MoltenVK).
+* {\bf Metal} - Grafické API od Applu, exkluzivní pro Apple platformy (macOS, iOS, iPadOS, tvOS). Velmi nízkoúrovňové, optimalizované pro Apple hardware.
+\enditems
+
+\sec Grafické API a herní engine
+Grafické API přináší stále vysokou kontrolu nad použitým GPU. To znamená, že většina grafických operací jako je vykreslení základních geometrických objektů nebo texturování není přímočaré a skládá se z určité posloupnosti dílčích příkazů jejichž výsledkem je požadovaná akce. To činí programování grafických aplikací čistě pomocí grafického API zdlouhavé a technicky stále relativně náročné. 
+
+Aby vývoj grafických aplikací jako jsou photoshopy nebo hry bylo rychlejší a méně náročné na použití, jsou nad grafickým API postaveny grafické knihovny vyšší úrovně jako jsou například herní enginy. Grafické knihovny a enginy (jako Unity nebo Unreal Engine) výrazně zjednodušují práci s grafikou, protože fungují jako chytrá vrstva abstrakce nad samotnými grafickými API (jako OpenGL nebo Vulkan). Dělají to dvěma hlavními způsoby:
+
+\begitems
+* {\bf Zjednodušují složité operace} - operace, které by bylo nutné provést pomocí mnoha dílčích příkazů grafického API je skryto pod jedním komplexním příkazem grafické knihovny. 
+* {\bf Abstrahují rozdíly mezi API a platformami} - různá grafická API stejnou věc umožňují realizovat jiným způsobem nebo jinými příkazy. Grafické knihovny umožňují skrýt tyto detaily a stejnou operaci můžou realizovat pomocí různých grafických api a uživateli umožňuje přepínat mezi tím jaké grafické API použít. 
+\enditems

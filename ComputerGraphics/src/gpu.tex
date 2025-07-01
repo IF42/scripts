@@ -1,0 +1,20 @@
+\chap Grafická karta
+
+{\bf Grafická karta}, často označovaná jako {\bf GPU} (Graphics Processing Unit), je specializovaná elektronická součástka navržená pro rychlé a efektivní zpracování a vykreslování obrazu.
+
+Zatímco CPU (Central Processing Unit) - hlavní procesor počítače - je skvělý v provádění široké škály úloh sériově (jedna po druhé), není ideální pro úlohy, které vyžadují obrovské množství paralelních výpočtů, jako je tomu u grafiky. Vykreslení jednoho snímku ve 3D hře může vyžadovat miliardy výpočtů pro každý pixel a každý vrchol modelu.
+
+Grafická karta je proto navržena tak, aby tyto specifické grafické výpočty prováděla masivně paralelně. Má tisíce menších, specializovaných jader (na rozdíl od několika málo, ale velmi výkonných jader CPU), která dokážou zpracovávat mnoho grafických úloh současně. To je klíčové pro plynulé zobrazení složitých scén.
+
+
+\sec Hlavní komponenty Grafické Karty
+
+\begitems
+* {\bf GPU (Graphics Processing Unit)} - Samotný grafický procesor, který je srdcem karty. Provádí veškeré výpočty související s 2D a 3D grafikou, zpracováním videa, a v moderní době i obecnými výpočty (tzv. GPGPU - General-Purpose computing on GPUs).
+* {\bf Video paměť (VRAM - Video Random Access Memory)} - Velmi rychlá paměť, která je vyhrazena pouze pro GPU. Slouží k ukládání dat potřebných pro vykreslování - textur, modelů, shaderů, z-bufferů, framebufferů a dalších informací, ke kterým má GPU okamžitý přístup. Rychlost a kapacita VRAM jsou klíčové pro výkon, zejména ve vysokém rozlišení.
+* {\bf Video BIOS (VBIOS)} - Malý firmware, který inicializuje grafickou kartu při startu počítače a obsahuje základní informace o kartě.
+* {\bf DAC (Digital-to-Analog Converter) / Video Output Interfaces} - Moderní karty používají digitální výstupy, jako jsou HDMI, DisplayPort nebo DVI-D, které převádějí digitální signál z GPU na formát, kterému rozumí monitor. Starší karty mohly mít i VGA (analogový) výstup.
+* {\bf Chladicí systém} - Vzhledem k obrovskému množství tepla generovaného GPU a VRAM při intenzivních operacích, jsou grafické karty vybaveny robustními chladicími systémy - pasivními chladiči (heatsinky) a aktivními ventilátory.
+* {\bf Sběrnice (PCI Express)} - Fyzické rozhraní, které umožňuje grafické kartě komunikovat s ostatními komponentami počítače, zejména s CPU a systémovou pamětí. Nejčastěji se používá standard PCI Express (PCIe).
+\enditems
+

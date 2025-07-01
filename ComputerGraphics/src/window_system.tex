@@ -1,0 +1,35 @@
+\chap Okenní systém
+Grafické API (jako OpenGL, Vulkan, Direct3D nebo Metal) je sada instrukcí, které umožňují komunikovat s grafickou kartou (GPU). Popisuje, jak provádět grafické výpočty, operace a jak pracovat s grafickou pamětí. Samotné API neřeší, jak se výsledek těchto výpočtů zobrazí na monitoru nebo jak se vytvoří okno, do kterého se má vykreslovat. To je práce pro operační systém a jeho {\bf okenní systém}.
+
+Každý operační systém (Windows, Linux, macOS) má svůj vlastní okenní systém. Ten je zodpovědný za všechno, co je zobrazeno na obrazovce a s čím daný program interaguje:
+\begitems
+* {\bf Vytváření a správa oken} - Vytváří okna, ikony, tlačítka a veškeré uživatelské rozhraní.
+* {\bf Zpracování uživatelského vstupu} - Reaguje na kliknutí myši, stisky kláves, dotyky.
+* {\bf Správa grafických bufferů} - Přiděluje paměťové oblasti (buffery), kam mohou aplikace vykreslovat.
+* {\bf Komunikace s ovladači displeje} - Posílá hotové pixely z těchto bufferů na monitor.
+\enditems
+
+\sec Běžné okenní systémy
+\begitems
+* {\bf Win32 API (pro Windows)}
+* {\bf X11 (X Window System) nebo Wayland (pro Linux)}
+* {\bf Cocoa (pro macOS)}
+\enditems
+
+\sec Napojení grafického API na nativní okno
+
+Než je možné cokoli zobrazit pomocí grafického API, je třeba nejprve vytvořit spojení mezi konkrétním grafickým API a oknem na daném systému. Tento proces se nazývá napojení nebo integrace (někdy se mluví o Window System Integration - WSI u Vulkanu).
+
+Základní kroky propojení jsou pro všechna grafická API a okenní systémy podobné, liší se jen konkrétní API volání:
+
+\begitems
+* {\bf Vytvoření Nativního Okna} - Nejprve je třeba pomocí funkcí okenního systému vytvořit standardní systémové okno, se kterým může uživatel interagovat. 
+* {\bf Získání "Vykreslovací Plochy"} - Z okna je třeba získat odkaz na jeho vykreslovací plochu (např. Device Context (HDC) na Windows, Drawable ID na X11 nebo wl\_surface na Waylandu). Tato plocha je pro grafické API cílem vykreslování.
+* {\bf Nastavení Pixel Formátu} - Systému je třeba sdělit, jaké vlastnosti má mít tato vykreslovací plocha (např. barevná hloubka, podpora dvojitého bufferování, hloubkový a stencil buffer). Tím se připraví buffer, do kterého bude GPU kreslit.
+* {\bf Vytvoření Grafického Renderovacího Kontextu} - Na základě vybraného pixel formátu a vykreslovací plochy se ovladač grafické karty požádá o vytvoření grafického renderovacího kontextu. Toto je stavový stroj na GPU, který uchovává všechna aktuální nastavení pro vykreslování.
+* {\bf Aktivace Kontextu} - Sdělení operačnímu systému, že daný konkrétní grafický kontext je aktivní pro aktuální vlákno programu. Teprve pak systém propojí volání funkcí grafického API konkrétnímu oknu.
+* {\bf Načtení Funkcí API (Loadery)} - Jelikož většina moderních funkcí grafických API není přímo součástí systémové knihovny, je třeba je dynamicky načíst za běhu. Teprve poté je možné volat funkce grafického API.
+* {\bf Výměna Bufferů (SwapBuffers)} - Po dokončení vykreslování jednoho snímku do skrytého (back) bufferu, je třeba dát okennímu systému příkaz k prohození tohoto back bufferu s aktuálně zobrazovaným (front) bufferem. Tím se vykreslený snímek zobrazí na monitoru a zabrání se blikání ({\bf Flickering}).
+\enditems
+
+
