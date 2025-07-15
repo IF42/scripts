@@ -1,0 +1,31 @@
+\chap Vykreslovací řetězec
+
+Vykreslování 3D scény na 2D obrazovku je komplexní proces, který zahrnuje mnoho fází. {\bf Vykreslovací řetězec (Graphics pipeline)} je metaforické označení pro řadu kroků a operací, kterými prochází geometrická data (body, čáry, trojúhelníky) a další informace (barvy, textury) od chvíle, kdy opustí CPU, až po zobrazení výsledného pixelu na monitoru. Vykreslovací řetězec je abstraktní model, který popisuje, jak jsou 3D modely zpracovány a přeměněny na 2D obraz. 
+
+\sec Jak fuguje vykreslovací řetězec
+Princip fungování vykreslovacího řetězce spočívá v sekvenčním zpracování dat, kde výstup z jedné fáze se stává vstupem pro fázi následující. Data tečou jednosměrně. Některé fáze jsou pevně dané (fixed-function) a jejich chování je řízeno nastavením, zatímco jiné jsou programovatelné, což znamená, že jejich chování je definováno kódem, který se nazývá {\bf shadery}.
+
+V moderních grafických API (Vulkan, Direct3D 12, Metal) se kompletní stav vykreslovacího řetězce (včetně všech shaderů a jejich nastavení) zapouzdří do jednoho objektu nazývaného {\bf Pipeline State Object (PSO)}. To GPU umožňuje efektivnější práci, protože všechny potřebné informace jsou dostupné najednou. 
+
+\sec Fáze vykreslovacího řetězce
+Vykreslovací řetězec se typicky dělí na několik klíčových fází, které lze kategorizovat na {\bf geometrické fáze (vertex processing)} a {\bf rasterizační fáze (pixel processing)}.
+
+\secc Geometrické Fáze (Vertex Processing) 
+Tyto fáze se zabývají zpracováním 3D geometrie a transformací vrcholů (bodů, které definují tvary). 
+\begitems
+* {\bf Vstupní sestavovač (Input Assembler)} - Načítá data o vrcholech (pozice, barvy, texturové souřadnice atd.) a indexy z paměti GPU. Sestavuje z nich základní grafické primitivum, jako jsou body, čáry nebo trojúhelníky.
+* {\bf Vertex Shader} - Je volán pro každý jednotlivý vrchol. Jeho hlavní úkol je transformovat 3D pozici vrcholu z lokálního prostoru objektu do 2D prostoru obrazovky (přesněji "clip space") pomocí transformačních matic (model, view, projection). Může také počítat barvy vrcholů, transformovat normály pro osvětlení, nebo předávat další data do následujících fází. Jedná se o programovatelnou část grafickéh řetězce.
+* {\bf Fáze teselace (Tessellation Stages - volitelná fáze)} - Tyto fáze (obvykle se skládají z Tessellation Control Shaderu, Pevné jednotky Tessellator a Tessellation Evaluation Shaderu) slouží k dynamickému generování geometrie. Dokážou z jednoduššího vstupu (např. patch) vytvořit mnohem detailnější síť trojúhelníků, často na základě vzdálenosti od kamery (blíž detailnější, dál hrubší). Jedná se o programovatelnou část grafickéh řetězce.
+* {\bf Geometry Shader (volitelná fáze)} - Přijímá celá primitiva (body, čáry nebo trojúhelníky) a může je buď modifikovat, nebo generovat nová primitiva. Například z jednoho bodu může vytvořit celý trojúhelník nebo rozdělit trojúhelník na menší. Jedná se o programovatelnou část grafickéh řetězce.
+* {\bf Klipování (Clipping)} - Odstraňuje části primitiv, které jsou mimo viditelnou oblast (frustum kamery). Tím se zajišťuje, že se zpracovávají a vykreslují jen ty části scény, které jsou skutečně viditelné.
+\enditems
+
+\secc Rasterizační Fáze (Pixel Processing)
+Tyto fáze převádějí 2D geometrii na pixely a rozhodují o jejich finální barvě a vlastnostech.
+\begitems
+* {\bf Rasterizátor (Rasterizer)} - Vezme 2D primitiva (trojúhelníky) a převádí je na sadu fragmentů. Fragment je potenciální pixel, který leží uvnitř primitivy. Pro každý fragment rasterizátor také interpoluje data (např. barvy, UV souřadnice, normály) z vrcholů, aby byly hodnoty plynulé přes celý povrch.
+* {\bf Fragment Shader (Pixel Shader)} - Je volán pro každý jednotlivý fragment generovaný rasterizátorem. Zde se provádí většina vizuálních výpočtů: aplikují se textury, počítá se per-pixel osvětlení, provádí se komplexní efekty materiálu. Jeho výstupem je finální barva fragmentu. Jedná se o programovatelnou část grafickéh řetězce.
+* {\bf Per-Fragment Testy a Míchání (Tests and blending)} - Poslední série testů a operací, které rozhodnou, zda a jak se fragment zapíše do barevného bufferu (framebufferu) a hloubkového bufferu.
+\enditems
+
+

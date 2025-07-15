@@ -1,0 +1,36 @@
+\chap GAL
+Grafická Abstraktní Vrstva (Graphics Abstraction Layer) nebo také Renderovací Abstraktní Vrstva (Render Abstraction Layer) je vrstva kódu, která leží mezi aplikačním kódem (např. herním enginem) a nízkoúrovňovými grafickými API (Vulkan, OpenGL nebo Direct X). Je to v podstatě rozhraní, které sjednocuje přístup k různým grafickým API, a umožňuje psát grafický kód jednou a nechat ho běžet na jakémkoli podporovaném API a platformě.
+
+\sec Důvody použití GAL
+\begitems
+* {\bf Multiplatformní kompatibilita} - Umožňuje spustit stejnou grafickou aplikaci na Windows (s Direct3D nebo Vulkan/OpenGL), Linuxu (s Vulkanem/OpenGL), macOS (s Metalem) nebo mobilních zařízeních, aniž by bylo nutné přepisovat renderovací kód.
+* {\bf Modularita a flexibilita} - Kód aplikace je oddělen od specifických detailů grafického API. Pokud se objeví nové API nebo bude potřeba podporovat starší hardware, stačí implementovat novou backendovou vrstvu pro GAL, aniž by se měnil zbytek enginu.
+* {\bf Zjednodušení vývoje} -  GAL abstrahuje složité a často odlišné nízkoúrovňové detaily různých API, což vede k čistšímu a snadněji udržovatelnému kódu na úrovni aplikace.
+\enditems
+
+
+\sec Funkce GAL
+Dobře navržená GAL by měla mít následující vlastnosti:
+\begitems \style n
+* {\bf Abstrakce klíčových grafických konceptů} - Měla by poskytovat jednotná rozhraní pro základní prvky grafického pipeline, které jsou společné pro všechna API:
+    \begitems
+    * {\it Zařízení (Device)} - Reprezentace grafické karty.
+    * {\it Kontext (Context/Command Queue)} - Rozhraní pro odesílání vykreslovacích příkazů.
+    * {\it Buffery (Buffers)} - Správa vertex dat, indexů, uniformních proměnných.
+    * {\it Textury (Textures)} - Správa obrazových dat.
+    * {\it Shadery (Shaders)} - Abstraktní rozhraní pro programovatelné jednotky na GPU.
+    * {\it Pipeline State Objects} - Zahrnuje nastavení jako blending, depth testing, culling, které jsou v moderních API často sjednocené.
+    * {\it Draw Calls} -  Příkazy k vykreslení geometrie.
+    * {\it Render Targets/Framebuffers} - Kam se vykresluje (na obrazovku, do textury).
+    \enditems
+* {\bf Nízká režie (Low Overhead)} - Měla by přidávat minimální výkonovou režii. To znamená, že by neměla provádět příliš mnoho dodatečných kontrol nebo konverzí, které by zpomalily běh programu. Cílem je být co nejblíže nativnímu výkonu základního API.
+* {\bf Flexibilita a rozšiřitelnost} - Měla by umožňovat přístup k pokročilým nebo API-pecifickým funkcím, pokud je to potřeba. Někdy je nutné "prolomit" abstrakci a získat nativní handle na objekt (např. GLuint z OpenGL nebo VkDevice z Vulkanu), aby bylo možné volat specifické funkce daného API. To na druhou stranu může rozbít nebo zkomplikovat přenositelnost mezi různými grafickými API.
+\enditems
+
+
+\sec Abstrakce vykreslovacího řetězce
+Grafické API jako OpenGL, Vulkan, Direct3D nebo Metal nabízejí odlišné přístupy k vykreslování grafiky. Přestože slouží stejnému účelu - vykreslení obrazu na obrazovku - jejich filozofie, způsob práce s pamětí, správou stavu a řízením průběhu vykreslování se výrazně liší. 
+
+
+\sec Vykreslování
+na vyšší úrovni vykreslovaní, to znamená v grafickém enginu se pak pro každý vykreslovaný objekt, ať už je to pixe, linka, trojúhelník nebo 3D objekt vytvoří objekt Mesh, který interně obsahuje vertex buffer. Objekt Mesh se následně interně uloží do pole vykreslovaných objektů, který je následně sekvenčně vykreslovaný.
