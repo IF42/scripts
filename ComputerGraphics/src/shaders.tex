@@ -1,0 +1,29 @@
+\chap Shader
+Shadery jsou základním stavebním kamenem moderní grafické pipeline, bez kterých by současné 3D hry a vizualizace nebyly možné. {\bf Shader} je v podstatě malý program napsaný ve speciálním programovacím jazyce, který běží na GPU. Na rozdíl od běžných programů pro CPU, které vykonávají instrukce sekvenčně, shadery běží na GPU paralelně na tisících, někdy i miliónech vláken najednou. Tento masivní paralelismus je klíčová pro rychlé zpracování obrovského množství grafických dat.  
+
+Primárním účelem shaderů je definovat, jak se má geometrie a barva objektů zobrazit na obrazovce. Mění pozice vrcholů, počítají barvy pixelů, simulují světlo a stín, a aplikují textury.
+
+\sec Účel shaderů
+
+\begitems
+* {\bf Realistické osvětlení a stíny} - Simulace, jak světlo dopadá na povrchy, jak se odráží a vytváří stíny.
+* {\bf Materiály a textury} - Aplikace obrázků na povrchy objektů (texturování) a definování vlastností materiálů (např. lesk, drsnost, průhlednost).
+* {\bf Speciální efekty} - Od ohně a kouře, přes vodu, déšť, sníh, až po pokročilé post-processing efekty (jako bloom, depth of field, motion blur).
+* {\bf Procedurální generování} - Vytváření geometrie nebo textur přímo na GPU bez nutnosti je předem ukládat.
+* {\bf Animace} - Deformace modelů pro animace (např. skinning, morphing)
+\enditems
+
+
+\sec Druhy shaderů v grafické pipelině
+Moderní grafická pipeline se skládá z několika fází, přičemž některé z nich jsou programovatelné pomocí shaderů. Nejčastěji se setkáváme s těmito typy:
+
+\begitems
+* {\bf Vertex Shader (Vrcholový Shader)} - Shader, která má za úkol zpracovat každý jednotlivý vrchol předané geometrie. Provádí například transformaci pozic pro zobrazení na obrazovku a výpočet dat do další fáze. 
+* {\bf Fragment Shader (Fragmentový Shader) / Pixel Shader} - Přebírá data z vertexovho shaderu a má za úkol zpracovat každý jednotlivý fragment (ekvivalent pixelu), který se má vykreslit na obrazovce. Má za úkol vypočítat finální barvu pro daný fragment. To znamená aplikaci textur, výpočet osvětlení, odlesků a dalších materiálových vlastností. 
+* {\bf Geometry Shader (Geometrický Shader)} - Volitelný shader pro pokročilé grafické techniky
+* {\bf Tessellation Shaders}  
+\enditems
+
+\sec Programování shaderů v různých grafických API
+Každé grafické API používá svůj vlastní jazyk ve kterém se popisují shadery. Například v OpenGL se používá jazyk GLSL (OpenGL Shading Language), v Metal je to MSL (Metal Shading Language) nebo v DirectX HLSL (High-Level Shading Language). 
+
