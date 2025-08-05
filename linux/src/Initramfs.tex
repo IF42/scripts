@@ -1,0 +1,25 @@
+\chap Initramfs
+Initramfs (zkratka pro initial RAM filesystem) je malý, dočasný souborový systém, který jádro Linuxu načítá do operační paměti (RAM) během rané fáze bootování. Jeho hlavním účelem je připravit prostředí, ve kterém jádro dokáže najít a připojit skutečný kořenový souborový systém (root filesystem), na kterém je nainstalovaný celý operační systém.
+
+Hlavní důvod existence initramfs spočívá v modularitě Linuxového jádra a rozmanitosti hardwaru:
+
+\begitems \style n
+* {\bf Chybějící ovladače v jádře} - Jádro Linuxu může být zkompilováno s mnoha ovladači jako moduly (soubory .ko), nikoli zabudované přímo v jádře. To šetří paměť a disk, protože se načítají jen potřebné ovladače. Problém nastává, když jádro potřebuje ovladač pro přístup k disku, na kterém je kořenový souborový systém (např. ovladač pro SATA řadič, NVMe disk, RAID pole, LVM svazek nebo šifrovaný disk). Pokud tento kritický ovladač není zabudován přímo v jádře, jádro ho nemůže načíst, protože k němu nemá přístup (nemá disk připojený!). Initramfs tento problém řeší protože obsahuje tyto kritické ovladače jako součást svého malého souborového systému.
+
+* {\bf Složitá Úložiště} - Kořenový souborový systém nemusí být vždy na jednoduchém, přímo přístupném oddílu. Může být na šifrovaném disku (LUKS), na LVM (Logical Volume Management) svazku, RAID poli nebo dokonce po síti (NFS). Initramfs obsahuje nástroje (jako cryptsetup, lvm, síťové nástroje), které jádru umožní tyto složité konfigurace dešifrovat, aktivovat nebo připojit.
+
+* {\bf Flexibilita při Bootování} - Initramfs umožňuje spouštět bootovací skripty (často init nebo linuxrc uvnitř initramfs), které provádějí předběžné operace, jako je dotazování se uživatele na heslo pro dešifrování disku, kontrola integrity souborového systému nebo příprava síťového připojení pro NFS root.
+\enditems
+
+\sec Fungování initramfs
+\begitems \style n
+* BIOS/UEFI se spustí a inicializuje základní hardware.
+* Bootloader (např. GRUB) se spustí.
+* GRUB načte do paměti soubor jádra (vmlinuz) a soubor initramfs (initramfs-<verze\_jádra>.img)
+* Jádro se spustí, to znamená že jádro dekomprimuje samo sebe a přenese obsah initramfs do RAM a připojí ho jako svůj dočasný kořenový souborový systém.
+* Initramfs se spustí. Tím jádro spustí první proces uvnitř sebe (obvykle /init nebo /linuxrc). Tento skript (běžící v initramfs) načte potřebné moduly jádra (pro disk, šifrování, LVM atd.). Provede se dešifrování disku (pokud je třeba), Aktivují se LVM svazky nebo RAID pole. Kořenový souborový systém je v této fázi nalezen a připraven.
+* "Hand-off" (předání kontroly). Jakmile je skutečný kořenový souborový systém připraven, proces uvnitř initramfs přepne kořenový souborový systém (pivot\_root) z initramfs na ten skutečný disk. Systém pak spustí finální proces init (nebo systemd) z hlavního souborového systému, a zbytek operačního systému se načte normálně.
+* Initramfs je poté uvolněn z paměti a již se nepoužívá.
+\enditems
+
+

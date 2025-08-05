@@ -1,0 +1,29 @@
+\chap Syntaktická analýza a syntaktické stromy
+
+
+\sec Abstraktní syntaktický strom
+
+\sec Pretty print
+"Pretty printing" abstraktního syntaktického stromu (AST) je proces převodu stromové struktury, která reprezentuje zdrojový kód programu, zpět do čitelné textové podoby. Cílem není nutně replikovat přesný původní kód (například mezery, komentáře a redundantní závorky jsou často vynechány v AST), ale vytvořit srozumitelnou a formátovanou reprezentaci kódu. Pretty printing AST je v podstatě traverzace (průchod) stromu, kde se pro každý navštívený uzel generuje odpovídající řetězec kódu. 
+
+\secc Princip Pretty Printingu
+Klíčovými aspekty jsou:
+
+\begitems
+* {\bf Rekurzivní traverzace}: Pretty printer typicky používá rekurzivní funkci nebo metodu, která prochází stromem od kořene dolů. Pro každý typ uzlu existuje specifická logika pro jeho tisk.
+* {\bf Generování textu}: Každý uzel je převeden na svůj textový ekvivalent. Jednoduché uzly, jako jsou čísla, řetězce nebo názvy proměnných, se jednoduše vytisknou. Binární operátory (např. +, -, *) se tisknou mezi jejich operandy. Příkazy (např. if, while, přiřazení) mají specifickou strukturu, která se generuje s klíčovými slovy jazyka a správným odsazením.
+* {\bf Formátování a odsazení}: Toto je klíčová část "pretty" tisku. Pro zvýšení čitelnosti se vnořené bloky kódu (např. těla funkcí, bloky if nebo while) odsazují. Pretty printer udržuje aktuální úroveň odsazení a přidává odpovídající počet mezer nebo tabulátorů před každý řádek kódu. Když je řádek příliš dlouhý, pretty printer se snaží najít vhodné místo pro zalomení řádku a pokračovat na novém odsazeném řádku. Někdy se přidávají prázdné řádky pro oddělení logických bloků kódu. Protože AST obvykle neobsahuje závorky, které jsou redundantní, pretty printer musí být schopen znovu vložit závorky tam, kde jsou potřeba pro zachování správné priority operátorů. To se obvykle řeší porovnáváním priority rodičovského operátoru s prioritou podřízeného operátoru.
+\enditems
+
+\secc Typické implementační vzory
+
+\begitems
+* {\bf Vzor Návštěvník (Visitor Pattern)}: Toto je velmi častý vzor pro procházení a zpracování AST. Definuje se rozhraní Visitor s metodou visit pro každý typ uzlu AST. Konkrétní PrettyPrinterVisitor implementuje tyto metody tak, aby generovaly příslušný kód. Každý uzel AST pak má metodu accept(Visitor v), která volá příslušnou visit metodu na návštěvníkovi. To odděluje logiku pretty printingu od definice samotného AST.
+* {\bf Rekurzivní funkce}: Jednodušší přístup pro menší jazyky nebo pro rychlé prototypy. Každá funkce odpovídá typu uzlu a rekurzivně volá funkce pro své potomky.
+\enditems
+
+\secc Odsazení v pretty printingu
+Nejdůležitější v pretty printingu pro zvýšení přehlednosti je správné formátování výsledného výpisu, to znamená, zalomení řádků, mezery a odsazení od začátku řádku, které definuje úrovně vnoření syntaktického stromu respektive konstrukce v parsovaném jazyce.
+
+
+

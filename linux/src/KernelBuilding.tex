@@ -1,1 +1,27 @@
 \chap Překlad jádra
+
+
+\sec Instalace jádra
+Po dokončení kompilace je v adresáři se zdrojovými kódy jádra velké množství nově vytvořených souborů. Většina z nich jsou ale pouze dočasné soubory z procesu překladu, jako jsou objektové soubory, logy a podobně. Instalace je proces, vezme všechny výsledné přeložené soubory jako je soubor jádra a jeho moduly a přesune je do instalačního adresáře, kde je připraví k použití a pro další fázi nastavení nového systému.
+
+Hlavním úkolem instalace je:
+\begitems
+* {\bf Instalace modulů jádra}: Umístění ovladačů a dalších částí jádra (které byly v menuconfig označeny jako [M]) na správné místo v adresářové struktuře systému.
+* {\bf Instalace samotného jádra}: Umístění hlavního spustitelného souboru jádra (vmlinuz nebo bzImage) do bootovacího oddílu.
+* {\bf Instalace pomocných souborů}: Zkopírování souborů jako System.map a config, které jsou užitečné pro ladění a referenci.
+* {\bf Aktualizace bootloaderu}: Informování bootloaderu (jako je GRUB), že existuje nové jádro, které může spustit.
+\enditems
+
+
+\sec Postup instalace
+Proces instalace se odehrává stále v kořenovém adresáři, kde jsou zdrojové kódy zkompilovaného jádra. 
+
+\secc Instalace modulů jádra
+Pro instalaci modulů jádra se používá příkaz:
+
+\begtt
+$ sudo make modules_install [INSTALL_MOD_PATH=<cesta>]
+\endtt
+
+Tento příkaz zkopíruje všechny zkompilované moduly (.ko soubory), do správného adresáře v systému nebo na adresu definovanou v proměnnou {\bf INSTALL\_MOD\_PATH}. Standardně se instalují do /lib/modules/<verze\_\_jádra>/.
+

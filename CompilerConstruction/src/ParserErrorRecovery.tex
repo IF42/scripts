@@ -1,0 +1,65 @@
+\chap Zpracování chyb 
+{\bf Zpracování chyb} je složitý mechanismus, který se dělí na tři hlavní fáze: {\bf detekci chyb}, {\bf zotavení z chyby} a {\bf reportování chyb}.
+
+\sec Detekce chyb (Error Detection)
+{\bf Detekce chyb} je proces identifikace konstrukcí v kódu, které porušují pravidla daného jazyka. V kompilátoru nebo obecně v parserech probíhá na různých úrovních: 
+
+\begitems
+* {\bf Lexikální chyby} - Vznikají, když lexikální analyzátor narazí na posloupnost znaků, kterou nedokáže rozpoznat jako platný token. Příkladem může být neznámý symbol nebo neukončený řetězec.
+* {\bf Syntaktické chyby} - Objevují se, když se tokeny objeví v nesprávném pořadí, což porušuje gramatiku jazyka. Klasickým příkladem je chybějící středník ';' na konci příkazu nebo nesprávně spárované závorky.
+* {\bf Sémantické chyby} Jsou složitější a objevují se až po parsování. Kód je sice syntakticky správný, ale porušuje sémantická pravidla. Například, při použití proměnné, která nebyla deklarována, nebo se přiřadí řetězec do proměnné číselného typu.
+\enditems
+
+\sec Zotavení z chyby (Error Recovery)
+Jakmile kompilátor detekuje chybu, neměl by se zastavit. Cílem je pokračovat v analýze, aby mohl najít další chyby v kódu, aby mohl ohlásit všechny chyby najednou. Proces, který to umožňuje, se nazývá {\bf zotavení z chyby}.
+
+Existují dva základní přístupy:
+
+\begitems
+* {\bf Panický mód (Panic Mode)} - Toto je jednoduchý a často používaný mechanismus. Jakmile kompilátor narazí na chybu, začne ignorovat vstupní tokeny, dokud nenajde "bezpečný" nebo synchronizační token. Příkladem může být středník ';' nebo uzavírací složená závorka '$\{$'. Kompilátor poté předpokládá, že daná chyba skončila a může začít znovu analyzovat od tohoto bodu. I když je implementace jednoduchá, tento přístup může vést k kaskádovým chybám (cascading errors), kdy jeden přeskočený token způsobí řadu dalších chyb, které ve skutečnosti neexistují.
+* {\bf Frázové zotavení (Phrase-level Recovery)} - Tento pokročilejší přístup se snaží provést lokální "opravu" chyby. Kompilátor se pokusí chybějící tokeny vložit nebo přebytečné smazat, aby se mohl vrátit do platného stavu. Díky tomu je přesnější a generuje méně kaskádových chyb, ale je také mnohem složitější na implementaci.
+\enditems
+
+\sec Mechanismy pro reportování chyb (Error Reporting)
+
+Správa a reportování chyb je pro uživatele klíčová. Kvalitní kompilátor musí chyby sbírat, ukládat a prezentovat je srozumitelným způsobem. Existují dva hlavní přístupy, jak reportovat nalezené chyby:
+
+\begitems
+* {\bf Okamžité reportování (Immediate Reporting)} - Chyba je hlášena a vytištěna do výstupu okamžitě, jakmile je detekována. Jedná se o jednoduché řešení kdy uživatel okamžitě vidí, kde je problém, a může reagovat v reálném čase. Hodí se pro interaktivní prostředí a pro malé projekty. Okamžitý výpis chyb může být nepřehledný, pokud kompilátor generuje kaskádové chyby. Zprávy o chybách se mohou míchat s jiným výstupem kompilátoru a mohou být chaotické. Navíc není možné předem seřadit chyby podle priority nebo umístění v souboru.
+* {\bf Bufferované reportování (Buffered Reporting)} - Chyby se nehlásí okamžitě. Místo toho se ukládají do {\bf zásobníku chyb (error buffer)} jako struktury nebo objekty, které obsahují typ chyby, závažnost, umístění a zprávu. Po dokončení kompilace (nebo určité fáze) se celý zásobník zpracuje a vytiskne najednou. Chyby jsou prezentovány jako ucelený seznam, oddělený od ostatního výstupu. Chyby lze zároveň seřadit podle čísla řádku nebo sloupce, což usnadňuje jejich opravu. Je také možné filtrovat chyby podle jejich závažnosti, takže například je možné zobrazit jen chyby, ne varování. Reportovací systém může analyzovat shromážděné chyby a poskytnout lepší kontext nebo navrhnout možné řešení. Nevýhodou ale je že se chyby neobjeví, dokud kompilace nedoběhne do konce, což může zpomalit zpětnou vazbu, zejména u kompilací rozsáhlých souborů. 
+\enditems
+
+Pro většinu moderních kompilátorů je bufferované reportování preferovanou metodou. Umožňuje totiž organizovaný a přehledný výpis chyb, což je neocenitelné, zejména u větších projektů.
+
+\sec Chybový systém
+Pro efektivní a přesné zpracování chyb nestačí pouze mít mechanismy pro jejich detekci a reportování. Kompilátor musí také uznat, že chyby vznikají v různých fázích kompilace a každá z nich nese odlišné typy informací. To vede k modulárnímu designu chybového systému, který se skládá z několika specializovaných částí.
+
+Každá fáze kompilace má svůj vlastní detektor chyb a generuje specifické chybové záznamy, které jsou přizpůsobeny informacím dostupným v dané chvíli. Tyto chyby se pak ukládají do centrálního zásobníku chyb, který je buď okamžitě zpracovává, nebo je shromažďuje a vypíše na konci. Takový modulární přístup umožňuje robustní a přesné reportování chyb, což je pro vývojáře neocenitelné.
+
+\sec Zachytávání chyb ve fázi předzpracování kompilace
+Zachyávání chyb z příkazové řádky, jako jsou chybné vstupní parametry nebo chybějící soubory, se liší od chyb uvnitř samotného zdrojového kódu. Tyto chyby se řadí do fáze {\bf předzpracování kompilace}. Z pohledu architekta kompilátoru jde o systémové a infrastrukturní chyby, které je třeba ošetřit dříve, než se vůbec spustí hlavní fáze kompilátoru (lexikální, syntaktická, atd.).
+
+Než se kompilátor pustí do analýzy zdrojového kódu, musí provést řadu kontrol na úrovni operačního systému a příkazové řádky. Tady se odehrává logika, která se stará o chyby, o kterých mluvíte:
+
+\begitems
+* {\bf Validace příkazové řádky} - Kompilátor analyzuje argumenty, které mu byly předány. Zde se kontroluje správnost syntaxe, platnost přepínačů a jejich hodnot.
+* {\bf Kontrola vstupních souborů} - Kompilátor ověří, zda zdrojové soubory, které mu byly předány, skutečně existují a jsou čitelné, případně zda existuje alespoň jeden vstupní soubor ke zpracování.
+* {\bf Nastavení prostředí} - Kompilátor může také kontrolovat proměnné prostředí nebo jiná systémová nastavení, která mohou ovlivnit jeho chování.
+\enditems
+
+Zásadní rozdíl spočívá v tom, že tyto chyby brání kompilátoru v tom, aby vůbec zahájil svou hlavní práci. Zatímco lexikální, syntaktické a sémantické chyby se týkají obsahu zdrojového kódu, chyby z příkazové řádky se týkají volání kompilátoru samotného.
+
+\sec Kontext chyb
+Aby byl chybový systém skutečně efektivní, musí být schopen zachytit a uložit relevantní data, která jsou k dispozici v dané fázi kompilace. Chybový objekt tak není jen jednoduchá zpráva, ale struktura, která obsahuje kontextové informace, které usnadní lokalizaci a opravu problému.
+
+\secc Chyby z lexikální analýzy
+Lexer operuje s proudem znaků, a proto jsou informace o chybě na nejnižší úrovni. Lexikální chyba by měla obsahovat číslo řádku a sloupce kde se chyba ve zdrojovém kódu. Tato informace je kritická, protože umožňuje přesně ukázat na místo v kódu. Dále by měla obsahovat popis chyby, tedy například že chybí ukončovací apostrov řetězce, nebo že je chybný formát desetinného čísla. Dále může obsahovat doplňující data, buď samotný neplatný znak a nebo sekvenci kódu, která chybu způsobila.
+
+\secc Chyby ze syntaktické analýzy
+Parser pracuje s tokeny a gramatikou, což mu umožňuje poskytnout podrobnější kontext. Opět by chyba měla obsahovat číslo řádku a sloupce kde se chyba ve zdrojovém kódu nachází. Opět by měla obsahovat i popis chyby a buď co parser očekával a nebo úsek kódu, který chybu způsobil. Propracovaný chybový systém pak možňuje předat jak očekávaný token (nebo jeden z možných tokenů), tak úsek zdrojového kódu ve kterém se chyba nachází případně i s popisem možného řešení. 
+
+\secc Chyby ze sémantické analýzy
+Sémantický analyzátor pracuje s abstraktním syntaktickým stromem (AST) a symbolovou tabulkou. Díky tomu dokáže generovat nejbohatší a nejpřesnější chybové zprávy. Pro lokalizaci chyby je opět potřeba číslo řádku a sloupce kde se chyba ve zdrojovém kódu nachází. Tato pozice je ale narozdíl od syntaktické nebo lexikální analýzy spolejena s celou gramatickou konstrukcí ve které se chyba nachází. To znamená, že chyba musí být popsána v rámci celé gramatické konstrukce. Jako doplňující informace se do chybového objektu vkládá i část abstraktního stromu ze kterého je složena textová podoba příkazu, která chybu vygenerovala. Pro každou chybu pak musí být vlastní funkce která z předaného AST složí chybový výpis, protože daná funkce bude vědět, že předaná část AST je daná gramatická konstrukce a bude vědět jak s ní manipulovat.
+
+\secc Mechanismy hlášení chyb
+Tyto chyby se obvykle reportují okamžitě a přímo na standardní chybový výstup (stderr). Zpráva je stručná, jasná a nevyžaduje složitou strukturu. Tento typ chybového hlášení je navržen tak, aby byl jednoduchý, rychlý a efektivně komunikoval s uživatelem. Vzhledem k tomu, že se jedná o chyby na úrovni vstupu do kompilátoru, není nutné používat složité bufferovací mechanismy. Kompilátor pouze zkontroluje vstup, a pokud je neplatný, ohlásí problém a ukončí se.
