@@ -1,6 +1,6 @@
 TEX=pdfcsplain
 SRC=src
-TARGET=AdvancedProgrammingConcepts
+TARGET=RTOS
 OUTPUT=pdf
 
 

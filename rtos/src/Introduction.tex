@@ -1,0 +1,47 @@
+\chap Úvod
+RTOS (Real-Time Operating System) je operační systém určený pro aplikace, které musí reagovat na události v předem známém čase. Nejde tedy primárně o rychlost, ale o předvídatelnost - úloha musí být provedena ve správný okamžik.
+
+RTOS obvykle nebývá tak velký a komplexní jako běžné operační systémy (Windows, Linux), ale naopak je co nejmenší, efektivní a uzpůsobený pro běh na mikrokontrolérech s omezenými zdroji (RAM, flash paměť, rychlost CPU).
+
+
+\sec Hlavní vlastnosti RTOS
+\begitems
+* {\bf Determinismus} . systém dokáže garantovat, že úloha bude spuštěna ve stanoveném čase (tzv. deadlines).
+* {\bf Multitasking} - schopnost spouštět více úloh (tasks) souběžně.
+* {\bf Plánovač (scheduler)} - algoritmus, který rozhoduje, která úloha poběží v daném okamžiku.
+* {\bf Prioritizace} - důležité úlohy mají vyšší prioritu a systém jim dává přednost.
+* {\bf Nízká režie (overhead)} - aby co nejméně zdrojů padlo na samotný chod RTOSu.
+\enditems
+
+\sec Kde se RTOS používá
+RTOS nachází uplatnění všude tam, kde je nutné časově spolehlivé řízení hardwaru nebo procesů:
+
+\begitems 
+* {\bf Vestavěné systémy (embedded systems)} - domácí spotřebiče, IoT zařízení.
+* {\bf Automotive} - řídicí jednotky motorů, airbagy, ABS (musí reagovat v řádu milisekund).
+* {\bf Robotika a drony} - řízení motorů, stabilizace letu, zpracování senzorů.
+* {\bf Telekomunikace} - směrovače, switche, mobilní zařízení. 
+* {\bf Průmyslová automatizace} - řízení výrobních linek, CNC stroje.
+* {\bf Zdravotnická technika} - přístroje, které musí reagovat přesně a spolehlivě.
+\enditems
+
+\sec Proč se RTOS používá
+Použití RTOSu má několik hlavních důvodů:
+
+\begitems
+* {\bf Předvídatelnost} - úlohy musí být vykonány ve správném čase, aby nedošlo k chybě (např. opožděné otevření airbagu = fatální problém).
+* {\bf Organizace úloh} - RTOS umožňuje logicky oddělit části programu (např. komunikace, ovládání motoru, zpracování senzorů).
+* {\bf Zjednodušení vývoje} - programátor nemusí řešit složité načasování v jedné hlavní smyčce, ale rozloží úlohy do samostatných tasků.
+* {\bf Rozšiřitelnost} - přidání nové funkce obvykle znamená jen přidání nové úlohy.
+* {\bf Opakovatelnost a testovatelnost} - úlohy běží v definovaných časových intervalech, což usnadňuje testování a ladění.
+* {\bf Přenositelnost} - RTOS vytváří jednotné rozhraní pro přístup k periferiím a tvorbě tasků na různých MCU/CPU, díky tomu je jednodušší daný software přenést i na jiný HW.
+\enditems
+
+\sec Typy real-time systémů
+
+\begitems
+* {\bf Hard real-time} - deadline musí být vždy dodržena (např. řízení airbagu, pacemaker).
+* {\bf Firm real-time} - občasné porušení deadline je tolerováno, ale snižuje kvalitu systému (např. streamování audia).
+* {\bf Soft real-time} - deadline je důležitá, ale překročení nevede k fatálnímu selhání (např. videohry).
+\enditems
+

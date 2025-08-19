@@ -1,0 +1,71 @@
+\chap Základní části RTOS
+
+
+\sec Úlohy (Tasks / Threads)
+Úloha (někdy označovaná jako task nebo vlákno) je základní jednotkou běhu programu v RTOSu.
+
+\secc Kód
+Funkce, kterou vykonává.
+
+\secc Stav 
+Vnitřní stav ve kterém se úloha v systému nachází. RTOS se stará o přechody mezi těmito stavy.
+
+\begitems
+* {\bf Running (běží)} - úloha právě využívá CPU.
+* {\bf Ready (připravená)} - úloha čeká na spuštění, jakmile jí to plánovač dovolí.
+* {\bf Blocked (čeká)} - úloha čeká na splnění podmínky (např. signál, dokončení I/O).
+* {\bf Suspended (pozastavená)} - úloha je zastavená až do další aktivace.
+\enditems
+
+\secc Priorita
+Číselná hodnota, která určuje, jak je úloha důležitá.
+
+\secc Stack
+Vlastní zásobník pro uložení kontextu, který se skládá z lokálních proměnných a návratových adres. 
+
+\sec Plánovač (Scheduler)
+{\bf Plánovač} je jádro RTOSu. Rozhoduje, která úloha poběží v daný okamžik. Existuje několik hlavních algoritmů:
+\begitems
+* {\bf Round Robin} - jednoduché střídání úloh v kruhu (každá úloha dostane krátký časový úsek - time slice).
+* {\bf Prioritní plánování} - úlohy s vyšší prioritou běží přednostně.
+* {\bf Preemptivní plánování} - pokud se objeví úloha s vyšší prioritou, RTOS okamžitě přeruší běžící úlohu a spustí důležitější.
+* {\bf Kooperativní plánování} - úloha musí sama předat řízení, RTOS ji nesmí přerušit (jednodušší implementace, ale horší spolehlivost).
+\enditems
+
+Většina moderních RTOS používá preemptivní prioritní plánování.
+
+\sec Kontext a jeho přepínání (Context Switching)
+Protože více úloh sdílí jedno CPU, musí RTOS při přepnutí úlohy:
+\begitems
+* uložit stav registrů (obsah CPU registrů, čítač instrukcí, zásobník)
+* obnovit stav jiné úlohy
+\enditems
+
+Tento proces se nazývá {\bf context switch}. Je to klíčová operace RTOSu a musí být co nejrychlejší, aby systém nebyl zahlcen jen přepínáním.
+
+\sec Synchronizace úloh
+Když více úloh spolupracuje nebo sdílí zdroje (např. UART, I2C, paměť), je nutný určitý způsob synchronizace přístupu ke sdíleným zdrojům:
+\begitems
+* {\bf Semafory} - binární nebo počítané signály, které určují přístup k prostředku.
+* {\bf Mutexy (Mutual Exclusion)} - zajišťují, že prostředek používá vždy jen jedna úloha.
+* {\bf Fronty (Queues)} - úlohy si posílají zprávy / data prostřednictvím fronty.
+* {\bf Události (Events)} - RTOS umožňuje úlohu probudit, jakmile nastane určitá podmínka.
+\enditems
+
+\sec Časovač
+RTOS má obvykle systémový časovač (tick timer), který:
+\begitems
+* udává rytmus pro plánovač (např. každých 1 ms)
+* umožňuje nastavit zpoždění (delay) nebo periodické úlohy
+* umožňuje měřit čas
+\enditems
+
+
+\sec Přerušení (Interrupts)
+RTOS spolupracuje s přerušením od hardwaru:
+\begitems
+* {\bf ISR (Interrupt Service Routine)} - funkce, která se vykoná při přerušení.
+* ISR by měla být co nejkratší a pokud je potřeba složitější akce, měla by ISR jen probudit úlohu, která ji vykoná.
+\enditems
+
+

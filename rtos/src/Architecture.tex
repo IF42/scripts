@@ -1,0 +1,14 @@
+\chap Architektura
+RTOS architektura se typicky skládá ze tří hlavních částí:
+\begitems
+* {\bf Jádro (Kernel)}: Jádro je srdcem každého RTOS. Je zodpovědné za správu úloh, plánování, mezitaskovou komunikaci a správu paměti. Jádro je optimalizováno pro minimalizaci latence a jitteru, což je kritické pro systémy s pevnými termíny.
+* {\bf Plánovač (Scheduler)}: Plánovač je klíčovou součástí jádra. Jeho úkolem je rozhodovat, která úloha má v daný okamžik běžet. Používá speciální plánovací algoritmy, jako je preemptivní plánování s prioritami, kde je vždy spuštěna úloha s nejvyšší prioritou. V některých pokročilých RTOS se používají i algoritmy jako Earliest Deadline First (EDF), které upřednostňují úlohy s nejbližším termínem dokončení.
+* {\bf Abstrakční vrstva pro hardware (Hardware Abstraction Layer - HAL)}: Tato vrstva odděluje jádro RTOS od konkrétního hardwaru. Díky HAL může být stejné jádro použito na různých procesorech a platformách. HAL řeší nízkoúrovňové detaily, jako je správa přerušení, časovače a komunikace s registry.
+\enditems
+
+\sec Typy architektur
+RTOS lze rozdělit do dvou hlavních kategorií na základě jejich struktury:
+\begitems
+* {\bf Monolitická architektura}: V tomto modelu jsou všechny komponenty RTOS, včet\-ně plánovače, správce paměti a ovladačů zařízení, integrovány do jednoho velkého modulu. 
+* {\bf Mikrojádrová architektura (Microkernel)}: Zde je jádro minimalistické a poskytuje jen základní funkce, jako je plánování a správa mezitaskové komunikace. Ostatní služby (např. ovladače zařízení, souborový systém) běží jako samostatné procesy v uživatelském prostoru. Tento model je robustnější a modulárnější, protože chyba v jedné službě neohrozí celý systém, ale obvykle má vyšší režii.
+\enditems

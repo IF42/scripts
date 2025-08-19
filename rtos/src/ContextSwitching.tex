@@ -1,0 +1,12 @@
+\chap Přepínání kontextu
+Kontext úlohy je soubor všech informací, které popisují aktuální stav běžící úlohy. Obsahuje:
+
+\begitems 
+* Obsah všech CPU registrů (obecné registry, speciální registry).
+* Stav ukazatele zásobníku (SP).
+* Stav programového čítače (PC).
+* Stav příznakového registru (např. SREG u AVR, xPSR u ARM).
+* Obsah FPU registrů (pokud existuje).
+\enditems
+
+Díky uložení a obnovení kontextu lze pozastavit jednu úlohu a později ji znovu spustit přesně od místa, kde skončila.

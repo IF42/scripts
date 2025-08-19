@@ -1,0 +1,16 @@
+\chap Plánovač úloh
+Plánovací algoritmy jsou srdcem každého RTOS, protože určují, jak se systém vypořádá s požadavky na přesné časování. Lze je rozdělit do dvou hlavních kategorií: preemptivní a nepreemptivní.
+
+\sec Preemptivní plánování (Preemptive Scheduling)
+V tomto modelu může být spuštěná úloha přerušena (preempted) ve prospěch jiné, důležitější úlohy. Jádro kontroluje stav úloh v každém cyklu časovače nebo při každé události (např. dokončení I/O operace) a okamžitě přepne na úlohu s nejvyšší prioritou.
+
+\secc Plánování s prioritami (Priority-Based Scheduling)
+Tento algoritmus je nejzákladnějším a nejčastěji používaným modelem v RTOS. Každé úloze je přidělena číselná priorita. Čím nižší číslo, tím vyšší priorita (nebo naopak, záleží na konvenci). Úloha s nejvyšší prioritou má vždy přednost před úlohami s prioritou nižší. Plánovač udržuje seznam všech úloh, které jsou připraveny ke spuštění (tzv. "ready queue"), seřazený podle priority. Výběr úlohy pro spuštění funguje na principu prioritní fronty. Když se úloha stane připravenou k běhu (např. po dokončení čekání na událost), je zařazena do speciální datové struktury zvané fronta připravených úloh (Ready Queue).
+
+\secc Plánování s nejbližším termínem (Earliest Deadline First - EDF)
+EDF je dynamický plánovací algoritmus, který je teoreticky optimální pro systémy, kde je termín dokončení důležitější než pevná priorita. Na rozdíl od prioritního plánování, kde je priorita statická, EDF dynamicky přiřazuje prioritu na základě blížícího se termínu dokončení.
+
+\sec Nepreemptivní plánování (Non-Preemptive Scheduling)
+V nepreemptivním modelu může úloha běžet, dokud se sama dobrovolně neuvolní (např. po dokončení nebo po čekání na událost). Tento přístup je jednodušší, ale méně vhodný pro systémy, které vyžadují rychlou odezvu na neočekávané události.
+
+

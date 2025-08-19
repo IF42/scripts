@@ -1,5 +1,30 @@
 \chap Syntaktická analýza a syntaktické stromy
 
+\sec Ambiguita
+{\bf Ambiguita} (vícevýznamovost) v syntaktické analýze nastává, když daný vstupní řetězec odpovídá více než jednomu možnému syntaktickému stromu (AST).
+Jinými slovy, existuje více než jedna správná interpretace stejného vstupu podle definované gramatiky. Ambiguita je problém, protože syntaktický analyzátor (parser) potřebuje zvolit jedinou správnou interpretaci, jinak nemůže jednoznačně pokračovat v překladu.
+
+V kontextu návrhu programovacích jazyků platí, že {\bf dobře navržená gramatika je neambiguózní}.
+
+\secc Příčiny ambiguity
+Ambiguita může vznikat z několika důvodů:
+\begitems 
+* {\bf Překrývající se pravidla gramatiky} - Pokud dvě různá pravidla dokáží pokrýt stejný vstup, parser neví, které použít. Například: 
+\begtt
+Expr ::= Number | Expr "+" Expr | Expr "*" Expr
+\endtt
+Řetězec $ 2 + 3 \char42 4$ může být interpretován buď jako $ (2 + 3) \char42 4$ nebo jako $ 2 + (3 \char42 4)$
+
+* {\bf Nedostatek precedencí a asociativity} - Když nejsou jasně definovaná pravidla pro pořadí operací, vzniká více možných stromů.
+* {\bf Chybějící oddělovače} - V jazycích bez ukončovacích symbolů (např. středníku) může být problém určit, kde jeden příkaz končí a další začíná. To je zvlášť relevantní u návrhů s volnou syntaxí, kde konec určuje jen struktura závorek.
+* {\bf 
+\enditems
+
+\secc Dopady ambiguity na parser
+\begitems
+* {\bf LL a LR parsery} vyžadují, aby gramatika byla jednoznačná. Ambiguózní gramatiky mohou vést k chybám typu shift/reduce conflict nebo reduce/reduce conflict.
+* {\bf Backtracking parsery} (např. rekurzivní sestup s backtrackingem) zvládnou ambiguitu vyřešit zkoušením všech možností, ale to je výpočetně náročné a nevhodné pro kompilátory.
+\enditems
 
 \sec Abstraktní syntaktický strom
 
@@ -24,6 +49,7 @@ Klíčovými aspekty jsou:
 
 \secc Odsazení v pretty printingu
 Nejdůležitější v pretty printingu pro zvýšení přehlednosti je správné formátování výsledného výpisu, to znamená, zalomení řádků, mezery a odsazení od začátku řádku, které definuje úrovně vnoření syntaktického stromu respektive konstrukce v parsovaném jazyce.
+
 
 
 
